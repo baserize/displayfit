@@ -71,18 +71,17 @@ Some monitors, docks, cables, KVMs, and DisplayLink-style adapters block brightn
 
 ### GitHub Release
 
-Download the notarized ZIP from the [latest release page](https://github.com/baserize/full-brightness/releases/latest), unzip it, and move `Full Brightness.app` to `/Applications`.
+Download the notarized DMG from the [latest release page](https://github.com/baserize/full-brightness/releases/latest), open it, and drag `Full Brightness.app` to `Applications`.
 
 Direct download:
 
 ```sh
-curl -L -o Full-Brightness-2026.05.08.001.zip \
-  https://github.com/baserize/full-brightness/releases/download/2026.05.08.001/Full-Brightness-2026.05.08.001.zip
-unzip Full-Brightness-2026.05.08.001.zip
-mv "Full Brightness.app" /Applications/
+curl -L -o Full-Brightness-2026.05.08.001.dmg \
+  https://github.com/baserize/full-brightness/releases/download/2026.05.08.001/Full-Brightness-2026.05.08.001.dmg
+open Full-Brightness-2026.05.08.001.dmg
 ```
 
-The release ZIP is signed with Developer ID and notarized by Apple for distribution outside the Mac App Store.
+The DMG and app are signed with Developer ID and notarized by Apple for distribution outside the Mac App Store. A ZIP asset is also published for automation, but the DMG is the default install path.
 
 ### Homebrew
 
@@ -179,7 +178,7 @@ Use Developer ID distribution for the private-API build:
 ./script/package_direct.sh
 ```
 
-The script requires a `Developer ID Application` certificate for public direct distribution. It archives `Direct Release`, exports with `packaging/ExportOptions-DeveloperID.plist`, stages the app as `Full Brightness.app`, creates a ZIP, prints the SHA-256, and verifies the exported signature. Set `NOTARYTOOL_PROFILE` to submit the ZIP with `xcrun notarytool` and staple the app before the final ZIP is created.
+The script requires a `Developer ID Application` certificate for public direct distribution. It archives `Direct Release`, exports with `packaging/ExportOptions-DeveloperID.plist`, stages the app as `Full Brightness.app`, creates both DMG and ZIP artifacts, prints SHA-256 values, and verifies the exported signature. Set `NOTARYTOOL_PROFILE` to submit the app and DMG with `xcrun notarytool`, then staple both before the final artifacts are published.
 
 For local ZIP checks without a Developer ID certificate:
 
@@ -189,9 +188,9 @@ For local ZIP checks without a Developer ID certificate:
 
 Suggested distribution order:
 
-1. GitHub Releases notarized ZIP
+1. GitHub Releases notarized DMG
 2. Homebrew cask in `Casks/full-brightness.rb`
-3. DMG later only if onboarding or branding needs it
+3. ZIP asset for automation or troubleshooting
 4. Sparkle later if automatic updates become necessary
 
 Apple's Developer ID flow expects apps distributed outside the Mac App Store to be Developer ID signed and notarized. Homebrew Cask expects a cask file with version, SHA-256, URL, metadata, and an `app` artifact.

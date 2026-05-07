@@ -11,7 +11,9 @@ DIST_PATH="$ROOT_DIR/.build/dist/direct"
 EXPORT_OPTIONS="$ROOT_DIR/packaging/ExportOptions-DeveloperID.plist"
 EXPORTED_APP_PATH=""
 APP_PATH="$DIST_PATH/Full Brightness.app"
+DMG_STAGING_PATH="$DIST_PATH/dmg-root"
 PACKAGE_MODE="developer-id"
+DEVELOPER_ID_APPLICATION=""
 
 for arg in "$@"; do
   case "$arg" in
@@ -44,7 +46,8 @@ rm -rf "$ARCHIVE_PATH" "$EXPORT_PATH" "$DIST_PATH"
 mkdir -p "$DIST_PATH"
 
 if [[ "$PACKAGE_MODE" == "developer-id" ]]; then
-  if ! security find-identity -p codesigning -v | grep -q "Developer ID Application"; then
+  DEVELOPER_ID_APPLICATION="$(security find-identity -p codesigning -v | awk -F '"' '/Developer ID Application/ { print $2; exit }')"
+  if [[ -z "$DEVELOPER_ID_APPLICATION" ]]; then
     echo "Developer ID Application signing identity is required for public direct distribution." >&2
     echo "Install the certificate, then rerun this script. Use --local only for local ZIP checks." >&2
     exit 1
@@ -84,11 +87,35 @@ DEFAULT_RELEASE_VERSION="$VERSION.$BUILD"
 if [[ "$BUILD" =~ ^([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{3})$ ]]; then
   DEFAULT_RELEASE_VERSION="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}.${BASH_REMATCH[4]}"
 fi
-ARTIFACT_NAME="Full-Brightness-${FULL_BRIGHTNESS_RELEASE_VERSION:-$DEFAULT_RELEASE_VERSION}.zip"
-ZIP_PATH="$DIST_PATH/$ARTIFACT_NAME"
+RELEASE_VERSION="${FULL_BRIGHTNESS_RELEASE_VERSION:-$DEFAULT_RELEASE_VERSION}"
+ZIP_ARTIFACT_NAME="Full-Brightness-$RELEASE_VERSION.zip"
+DMG_ARTIFACT_NAME="Full-Brightness-$RELEASE_VERSION.dmg"
+ZIP_PATH="$DIST_PATH/$ZIP_ARTIFACT_NAME"
+DMG_PATH="$DIST_PATH/$DMG_ARTIFACT_NAME"
+
+create_dmg() {
+  rm -rf "$DMG_STAGING_PATH" "$DMG_PATH"
+  mkdir -p "$DMG_STAGING_PATH"
+
+  ditto "$APP_PATH" "$DMG_STAGING_PATH/Full Brightness.app"
+  ln -s /Applications "$DMG_STAGING_PATH/Applications"
+
+  hdiutil create \
+    -volname "Full Brightness" \
+    -srcfolder "$DMG_STAGING_PATH" \
+    -ov \
+    -format UDZO \
+    "$DMG_PATH"
+
+  rm -rf "$DMG_STAGING_PATH"
+
+  if [[ "$PACKAGE_MODE" == "developer-id" ]]; then
+    codesign --force --sign "$DEVELOPER_ID_APPLICATION" --timestamp "$DMG_PATH"
+  fi
+}
 
 if [[ "$PACKAGE_MODE" == "developer-id" && -n "${NOTARYTOOL_PROFILE:-}" ]]; then
-  PRE_NOTARY_ZIP="$DIST_PATH/pre-notary-$ARTIFACT_NAME"
+  PRE_NOTARY_ZIP="$DIST_PATH/pre-notary-$ZIP_ARTIFACT_NAME"
   ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$PRE_NOTARY_ZIP"
   xcrun notarytool submit "$PRE_NOTARY_ZIP" --keychain-profile "$NOTARYTOOL_PROFILE" --wait
   xcrun stapler staple "$APP_PATH"
@@ -98,10 +125,22 @@ elif [[ -n "${NOTARYTOOL_PROFILE:-}" ]]; then
 fi
 
 ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
-shasum -a 256 "$ZIP_PATH"
+create_dmg
+
+if [[ "$PACKAGE_MODE" == "developer-id" && -n "${NOTARYTOOL_PROFILE:-}" ]]; then
+  xcrun notarytool submit "$DMG_PATH" --keychain-profile "$NOTARYTOOL_PROFILE" --wait
+  xcrun stapler staple "$DMG_PATH"
+fi
+
+shasum -a 256 "$ZIP_PATH" "$DMG_PATH"
 
 codesign --verify --deep --strict --verbose=2 "$APP_PATH"
-xcrun stapler validate "$APP_PATH"
-spctl -a -vv --type execute "$APP_PATH"
+if [[ "$PACKAGE_MODE" == "developer-id" && -n "${NOTARYTOOL_PROFILE:-}" ]]; then
+  xcrun stapler validate "$APP_PATH"
+  xcrun stapler validate "$DMG_PATH"
+  spctl -a -vv --type execute "$APP_PATH"
+  spctl -a -vv --type install "$DMG_PATH"
+fi
 
 echo "Packaged $ZIP_PATH"
+echo "Packaged $DMG_PATH"
