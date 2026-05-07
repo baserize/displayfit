@@ -1,18 +1,18 @@
 import AppIntents
 
-struct SetAllDisplaysToMaximumIntent: AppIntent {
+struct SetDisplaysToFullBrightnessIntent: AppIntent {
     static let title: LocalizedStringResource = "intent.set_all.title"
     static let description = IntentDescription("intent.set_all.description")
     static let supportedModes: IntentModes = .foreground(.immediate)
     static let authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        await BrightnessIntentAction.setAllDisplaysToMaximum()
-        return .result(dialog: "\(L10n.string("intent.set_all.dialog"))")
+        let result = await BrightnessIntentAction.setAllDisplaysToFullBrightness()
+        return .result(dialog: "\(L10n.string("intent.set_all.dialog_format", result.targetPercent))")
     }
 }
 
-struct SetAutoMaxBrightnessIntent: SetValueIntent {
+struct SetAutoFullBrightnessIntent: SetValueIntent {
     static let title: LocalizedStringResource = "intent.auto.title"
     static let description = IntentDescription("intent.auto.description")
     static let supportedModes: IntentModes = .foreground(.immediate)
@@ -30,49 +30,52 @@ struct SetAutoMaxBrightnessIntent: SetValueIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        await BrightnessIntentAction.setAutoMaxBrightness(value)
+        _ = await BrightnessIntentAction.setAutoFullBrightness(value)
         return .result()
     }
 }
 
-struct EnableAutoMaxBrightnessIntent: AppIntent {
+struct EnableAutoFullBrightnessIntent: AppIntent {
     static let title: LocalizedStringResource = "intent.auto.enable.title"
     static let description = IntentDescription("intent.auto.enable.description")
     static let supportedModes: IntentModes = .foreground(.immediate)
     static let authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        await BrightnessIntentAction.setAutoMaxBrightness(true)
-        return .result(dialog: "\(L10n.string("intent.auto.enable.dialog"))")
+        let targetPercent = await BrightnessIntentAction.setAutoFullBrightness(true)
+        return .result(dialog: "\(L10n.string("intent.auto.enable.dialog_format", targetPercent))")
     }
 }
 
-struct DisableAutoMaxBrightnessIntent: AppIntent {
+struct DisableAutoFullBrightnessIntent: AppIntent {
     static let title: LocalizedStringResource = "intent.auto.disable.title"
     static let description = IntentDescription("intent.auto.disable.description")
     static let supportedModes: IntentModes = .foreground(.immediate)
     static let authenticationPolicy: IntentAuthenticationPolicy = .alwaysAllowed
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        await BrightnessIntentAction.setAutoMaxBrightness(false)
+        _ = await BrightnessIntentAction.setAutoFullBrightness(false)
         return .result(dialog: "\(L10n.string("intent.auto.disable.dialog"))")
     }
 }
 
 private enum BrightnessIntentAction {
-    static func setAllDisplaysToMaximum() async {
-        _ = await DisplayBrightnessClient.shared.setAllDisplaysToMaximum()
+    static func setAllDisplaysToFullBrightness() async -> BrightnessRunResult {
+        let preferences = BrightnessPreferences()
+        let result = await DisplayBrightnessClient.shared.setAllDisplays(to: preferences.targetBrightnessValue)
         ControlCenterReloader.reloadBrightnessControls()
+        return result
     }
 
-    static func setAutoMaxBrightness(_ isEnabled: Bool) async {
+    static func setAutoFullBrightness(_ isEnabled: Bool) async -> Int {
         let preferences = BrightnessPreferences()
-        preferences.autoMaxEnabled = isEnabled
+        preferences.autoFullEnabled = isEnabled
 
         if isEnabled {
-            _ = await DisplayBrightnessClient.shared.setAllDisplaysToMaximum()
+            _ = await DisplayBrightnessClient.shared.setAllDisplays(to: preferences.targetBrightnessValue)
         }
 
         ControlCenterReloader.reloadBrightnessControls()
+        return preferences.targetBrightnessPercent
     }
 }

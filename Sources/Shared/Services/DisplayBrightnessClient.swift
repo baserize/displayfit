@@ -7,7 +7,7 @@ actor DisplayBrightnessClient {
         controller.displays()
     }
 
-    func setAllDisplaysToMaximum() -> BrightnessRunResult {
-        controller.setAllDisplaysToMaximum()
+    func setAllDisplays(to targetBrightness: Float) -> BrightnessRunResult {
+        controller.setAllDisplays(to: targetBrightness)
     }
 }

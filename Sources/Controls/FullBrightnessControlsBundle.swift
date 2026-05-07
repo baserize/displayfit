@@ -5,6 +5,6 @@ import WidgetKit
 struct FullBrightnessControlsBundle: WidgetBundle {
     var body: some Widget {
         SetAllDisplaysControl()
-        AutoMaxBrightnessControl()
+        AutoFullBrightnessControl()
     }
 }

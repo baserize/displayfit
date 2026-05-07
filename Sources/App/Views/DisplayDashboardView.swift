@@ -24,7 +24,7 @@ struct DisplayDashboardView: View {
                 }
 
                 Button {
-                    model.setAllDisplaysToMaximum()
+                    model.setAllDisplaysToFullBrightness()
                 } label: {
                     Label("action.set_all.short", systemImage: "sun.max.fill")
                 }
@@ -60,16 +60,24 @@ private struct DisplayActionPanel: View {
             Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 16) {
                 GridRow {
                     Button {
-                        model.setAllDisplaysToMaximum()
+                        model.setAllDisplaysToFullBrightness()
                     } label: {
-                        Label("action.set_all.connected", systemImage: "sun.max.fill")
+                        Label {
+                            Text(L10n.string("action.set_all.connected_format", model.targetBrightnessPercent))
+                        } icon: {
+                            Image(systemName: "sun.max.fill")
+                        }
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
 
-                    Toggle(isOn: $model.autoMaxEnabled) {
-                        Label("action.auto_on_connect", systemImage: "arrow.triangle.2.circlepath")
+                    Toggle(isOn: $model.autoFullEnabled) {
+                        Label {
+                            Text(L10n.string("action.auto_on_connect_format", model.targetBrightnessPercent))
+                        } icon: {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                        }
                     }
                     .toggleStyle(.switch)
                     .controlSize(.large)

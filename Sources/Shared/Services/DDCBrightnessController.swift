@@ -26,12 +26,15 @@ struct DDCBrightnessController: Sendable {
     }
 
     @discardableResult
-    func setBrightnessToMaximum(framebuffer: io_service_t) -> Bool {
+    func setBrightness(_ normalizedValue: Float, framebuffer: io_service_t) -> Bool {
+        let clampedValue = min(max(normalizedValue, 0), 1)
+
         for interface in interfaces(framebuffer: framebuffer) {
             defer { IOObjectRelease(interface) }
 
             let maximum = readBrightness(interface: interface)?.maximum ?? 100
-            if setBrightness(maximum, interface: interface) {
+            let rawValue = UInt16((Float(maximum) * clampedValue).rounded())
+            if setBrightness(rawValue, interface: interface) {
                 return true
             }
         }

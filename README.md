@@ -1,6 +1,6 @@
 # Full Brightness
 
-Full Brightness is a macOS utility for display-heavy setups. It lists connected displays, shows resolution and HiDPI details, identifies which displays can be controlled, and can set supported displays to 100% brightness on demand or automatically when a new display connects.
+Full Brightness is a macOS utility for display-heavy setups. It lists connected displays, shows resolution and HiDPI details, identifies which displays can be controlled, and can set supported displays to your chosen Full brightness level on demand or automatically when a new display connects.
 
 Current release: `2026.05.07.001`
 
@@ -18,31 +18,34 @@ Some monitors, docks, cables, KVMs, and DisplayLink-style adapters block brightn
 - **Brightness-capable display detection**  
   Lists connected displays and clearly marks whether brightness can be read or written.
 
-- **One-click 100% brightness**  
-  Sets every adjustable connected display to full brightness from the main window, menu bar, Control Center, Shortcuts, Siri, or Spotlight.
+- **Custom Full brightness level**  
+  Lets you define what Full means for your setup from 1% to 100%.
 
-- **Automatic 100% brightness on connection**  
-  When auto mode is enabled, newly connected adjustable displays are raised to 100% automatically.
+- **One-click Full brightness**  
+  Sets every adjustable connected display to your Full level from the main window, menu bar, Control Center, Shortcuts, Siri, or Spotlight.
+
+- **Automatic Full brightness on connection**  
+  When auto mode is enabled, newly connected adjustable displays are raised to your Full level automatically.
 
 - **Live brightness refresh**  
   Keeps the display list in sync when brightness changes outside the app, including macOS display controls and hardware keys.
 
 - **Control Center controls**  
   Provides two WidgetKit controls for macOS Control Center:
-  - `Display 100%`: instantly sets supported displays to 100%.
-  - `On connect 100%`: toggles automatic full brightness for newly connected displays.
+  - `Display Full`: instantly sets supported displays to your Full level.
+  - `On connect Full`: toggles automatic Full brightness for newly connected displays.
 
 - **Menu bar utility**  
-  Includes a compact menu bar extra with refresh, one-click 100%, auto mode, display status, app opening, settings, and quit actions.
+  Includes a compact menu bar extra with refresh, one-click Full brightness, auto mode, display status, app opening, settings, and quit actions.
 
 - **Native Settings and Launch at Login**  
   Uses a standard macOS Settings window for app-level options, including launch at login.
 
 - **App Shortcuts integration**  
   Exposes App Intents-backed shortcuts for Shortcuts, Siri, and Spotlight:
-  - `Displays 100%`
-  - `Auto 100% On`
-  - `Auto 100% Off`
+  - `Displays Full`
+  - `Auto Full On`
+  - `Auto Full Off`
 
 - **Resolution and HiDPI details**  
   Shows logical resolution, HiDPI scale, backing pixel resolution, and refresh rate when macOS reports them.
@@ -63,9 +66,10 @@ The current GitHub build is a developer preview build and is not notarized. If m
 
 1. Open Full Brightness.
 2. Review the display list and support status.
-3. Click `Connected displays 100%` to set all supported displays to full brightness.
-4. Turn on `Auto 100% on connect` if newly connected supported displays should always be raised to 100%.
-5. Open Settings from the toolbar or menu bar extra to enable launch at login.
+3. Open Settings and choose your Full brightness level if 100% is not the right target for your setup.
+4. Click `Connected displays Full` to set all supported displays to that level.
+5. Turn on `Auto Full on connect` if newly connected supported displays should always be raised to your Full level.
+6. Use Settings from the toolbar or menu bar extra to enable launch at login.
 
 ## Control Center
 
@@ -73,7 +77,7 @@ After installing or running the app, open Control Center customization, search f
 
 ## App Shortcuts
 
-Open Shortcuts or Spotlight and search for Full Brightness. The app provides localized App Intents-backed shortcuts for setting displays to 100%, turning auto mode on, and turning auto mode off.
+Open Shortcuts or Spotlight and search for Full Brightness. The app provides localized App Intents-backed shortcuts for setting displays to your Full level, turning auto mode on, and turning auto mode off.
 
 ## Display Support
 

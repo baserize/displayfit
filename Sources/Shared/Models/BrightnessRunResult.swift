@@ -4,6 +4,7 @@ struct BrightnessRunResult: Equatable, Sendable {
     let attemptedCount: Int
     let succeededCount: Int
     let failedDisplays: [String]
+    let targetPercent: Int
     let completedAt: Date
 
     var summaryText: String {
@@ -12,9 +13,9 @@ struct BrightnessRunResult: Equatable, Sendable {
         }
 
         if failedDisplays.isEmpty {
-            return L10n.string("brightness.result.success_format", succeededCount)
+            return L10n.string("brightness.result.success_format", succeededCount, targetPercent)
         }
 
-        return L10n.string("brightness.result.partial_format", succeededCount, attemptedCount)
+        return L10n.string("brightness.result.partial_format", succeededCount, attemptedCount, targetPercent)
     }
 }

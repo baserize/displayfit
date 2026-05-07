@@ -3,8 +3,8 @@ import WidgetKit
 
 struct SetAllDisplaysControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: AppConstants.controlKindSetAll) {
-            ControlWidgetButton(action: SetAllDisplaysToMaximumIntent()) {
+        StaticControlConfiguration(kind: AppConstants.controlKindSetFullBrightness) {
+            ControlWidgetButton(action: SetDisplaysToFullBrightnessIntent()) {
                 Label("action.set_all.short", systemImage: "sun.max.fill")
             }
         }
@@ -13,10 +13,10 @@ struct SetAllDisplaysControl: ControlWidget {
     }
 }
 
-struct AutoMaxBrightnessControl: ControlWidget {
+struct AutoFullBrightnessControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: AppConstants.controlKindAutoMode, provider: AutoModeValueProvider()) { isOn in
-            ControlWidgetToggle(isOn: isOn, action: SetAutoMaxBrightnessIntent()) {
+        StaticControlConfiguration(kind: AppConstants.controlKindAutoFullMode, provider: AutoModeValueProvider()) { isOn in
+            ControlWidgetToggle(isOn: isOn, action: SetAutoFullBrightnessIntent()) {
                 Label("control.auto.label", systemImage: isOn ? "sun.max.fill" : "sun.max")
             } valueLabel: { isOn in
                 if isOn {
@@ -35,6 +35,6 @@ struct AutoModeValueProvider: ControlValueProvider {
     var previewValue: Bool { true }
 
     func currentValue() async throws -> Bool {
-        BrightnessPreferences().autoMaxEnabled
+        BrightnessPreferences().autoFullEnabled
     }
 }

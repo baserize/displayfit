@@ -14,20 +14,20 @@ struct FullBrightnessApp: App {
         .defaultSize(width: 860, height: 620)
         .commands {
             CommandGroup(after: .appInfo) {
-                Button("action.set_all.all_displays") {
-                    model.setAllDisplaysToMaximum()
+                Button(L10n.string("action.set_all.all_displays_format", model.targetBrightnessPercent)) {
+                    model.setAllDisplaysToFullBrightness()
                 }
                 .keyboardShortcut("b", modifiers: [.command, .shift])
             }
         }
 
-        MenuBarExtra("app.title", systemImage: model.autoMaxEnabled ? "sun.max.fill" : "sun.max") {
+        MenuBarExtra("app.title", systemImage: model.autoFullEnabled ? "sun.max.fill" : "sun.max") {
             MenuBarControlView(model: model)
         }
         .menuBarExtraStyle(.window)
 
         Settings {
-            SettingsView()
+            SettingsView(model: model)
         }
     }
 }

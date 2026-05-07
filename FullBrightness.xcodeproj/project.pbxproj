@@ -16,7 +16,7 @@
 		33AFE0970F868A5AF2D1425E /* BrightnessPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FABEF2281F8D87226DB863 /* BrightnessPreferences.swift */; };
 		3809A5DF8E8127805610FDA6 /* MenuBarControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323FE3AE9E055522E37E1AF /* MenuBarControlView.swift */; };
 		3D3329B1610D667003016A2B /* LaunchAtLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F11FAA1D9B577C58B2AAEC /* LaunchAtLoginController.swift */; };
-		432D18B3AB8030A573037779 /* FullBrightnessControls.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B1F1CEA901266A0198575A25 /* FullBrightnessControls.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		432D18B3AB8030A573037779 /* FullBrightnessControls.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B1F1CEA901266A0198575A25 /* FullBrightnessControls.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		44A96EE40BE3FCAE2F183555 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 382E785AF019E45785C3A69A /* Localizable.strings */; };
 		47B1D9A29499F690F704F8D3 /* DisplayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988030B02557E9553F27B0E3 /* DisplayListView.swift */; };
 		541A3D4D7740C64F21ABAAC0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F241D253AE183C330BE9AA64 /* ContentView.swift */; };
@@ -312,11 +312,11 @@
 				TargetAttributes = {
 					3097F98D08CE9A8662909FAD = {
 						DevelopmentTeam = 27LDR382XX;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					7E14CBB3C76EC3EF7C64D361 = {
 						DevelopmentTeam = 27LDR382XX;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -447,7 +447,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CODE_SIGN_ENTITLEMENTS = Sources/Controls/FullBrightnessControls.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 27LDR382XX;
 				INFOPLIST_FILE = Sources/Controls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -493,8 +495,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 20260507001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -517,7 +518,6 @@
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "$(inherited) -F$(SDKROOT)/System/Library/PrivateFrameworks -framework CoreDisplay -framework DisplayServices";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = Sources/Shared/Support/DisplayPrivateAPIs.h;
@@ -531,7 +531,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CODE_SIGN_ENTITLEMENTS = Sources/Controls/FullBrightnessControls.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 27LDR382XX;
 				INFOPLIST_FILE = Sources/Controls/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,7 +552,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CODE_SIGN_ENTITLEMENTS = Sources/App/FullBrightness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 27LDR382XX;
 				INFOPLIST_FILE = Sources/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -568,7 +572,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CODE_SIGN_ENTITLEMENTS = Sources/App/FullBrightness.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 27LDR382XX;
 				INFOPLIST_FILE = Sources/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -613,8 +619,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 20260507001;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -644,7 +649,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited) -F$(SDKROOT)/System/Library/PrivateFrameworks -framework CoreDisplay -framework DisplayServices";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = Sources/Shared/Support/DisplayPrivateAPIs.h;

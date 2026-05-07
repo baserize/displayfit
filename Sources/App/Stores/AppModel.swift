@@ -16,19 +16,31 @@ final class AppModel {
     var displays: [DisplayDevice] = []
     var lastRunResult: BrightnessRunResult?
 
-    var autoMaxEnabled: Bool {
-        get { preferences.autoMaxEnabled }
+    var autoFullEnabled: Bool {
+        get { preferences.autoFullEnabled }
         set {
-            guard preferences.autoMaxEnabled != newValue else { return }
-            preferences.autoMaxEnabled = newValue
+            guard preferences.autoFullEnabled != newValue else { return }
+            preferences.autoFullEnabled = newValue
             ControlCenterReloader.reloadBrightnessControls()
 
             if newValue {
-                setAllDisplaysToMaximum()
+                setAllDisplaysToFullBrightness()
             } else {
                 autoBrightnessTask?.cancel()
                 autoBrightnessTask = nil
             }
+        }
+    }
+
+    var targetBrightnessPercent: Int {
+        get { preferences.targetBrightnessPercent }
+        set {
+            let clampedValue = BrightnessPreferences.clampedTargetBrightnessPercent(newValue)
+            guard preferences.targetBrightnessPercent != clampedValue else { return }
+
+            preferences.targetBrightnessPercent = clampedValue
+            lastRunResult = nil
+            ControlCenterReloader.reloadBrightnessControls()
         }
     }
 
@@ -40,7 +52,7 @@ final class AppModel {
         observeScreenParameterChanges()
         startDisplayRefreshPolling()
 
-        if autoMaxEnabled {
+        if autoFullEnabled {
             scheduleAutoBrightnessPass()
         }
     }
@@ -54,11 +66,12 @@ final class AppModel {
         }
     }
 
-    func setAllDisplaysToMaximum() {
+    func setAllDisplaysToFullBrightness() {
         let brightnessClient = brightnessClient
+        let targetBrightness = preferences.targetBrightnessValue
 
         Task { [weak self] in
-            let result = await brightnessClient.setAllDisplaysToMaximum()
+            let result = await brightnessClient.setAllDisplays(to: targetBrightness)
             let latestDisplays = await brightnessClient.displays()
             self?.applyBrightnessRunResult(result, displays: latestDisplays)
         }
@@ -67,7 +80,7 @@ final class AppModel {
     private func handleDisplayChange(flags: CGDisplayChangeSummaryFlags) {
         refreshDisplays()
 
-        guard autoMaxEnabled, flags.shouldTriggerAutoBrightness else { return }
+        guard autoFullEnabled, flags.shouldTriggerAutoBrightness else { return }
         scheduleAutoBrightnessPass()
     }
 
@@ -86,7 +99,7 @@ final class AppModel {
     private func handleScreenParametersChange() {
         refreshDisplays()
 
-        if autoMaxEnabled {
+        if autoFullEnabled {
             scheduleAutoBrightnessPass()
         }
     }
@@ -130,8 +143,8 @@ final class AppModel {
                 guard !Task.isCancelled else { return }
 
                 await MainActor.run {
-                    guard self?.autoMaxEnabled == true else { return }
-                    self?.setAllDisplaysToMaximum()
+                    guard self?.autoFullEnabled == true else { return }
+                    self?.setAllDisplaysToFullBrightness()
                 }
             }
         }

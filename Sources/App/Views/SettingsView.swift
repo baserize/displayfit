@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Bindable var model: AppModel
     @State private var launchAtLoginState = LaunchAtLoginController().state
     @State private var launchAtLoginError: String?
 
@@ -8,6 +9,31 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            Section("settings.section.brightness") {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Label("settings.full_level", systemImage: "sun.max.fill")
+
+                        Spacer()
+
+                        Text(L10n.string("brightness.percent_format", model.targetBrightnessPercent))
+                            .foregroundStyle(.secondary)
+                            .monospacedDigit()
+                    }
+
+                    Slider(
+                        value: targetBrightnessSliderBinding,
+                        in: Double(BrightnessPreferences.targetBrightnessPercentRange.lowerBound)...Double(BrightnessPreferences.targetBrightnessPercentRange.upperBound),
+                        step: 1
+                    )
+
+                    Stepper(value: $model.targetBrightnessPercent, in: BrightnessPreferences.targetBrightnessPercentRange) {
+                        Text(L10n.string("settings.full_level.stepper_format", model.targetBrightnessPercent))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+
             Section("settings.section.general") {
                 Toggle(isOn: launchAtLoginBinding) {
                     Label("settings.launch_at_login", systemImage: "power")
@@ -29,6 +55,14 @@ struct SettingsView: View {
         .frame(width: 460)
         .onAppear {
             refreshLaunchAtLoginState()
+        }
+    }
+
+    private var targetBrightnessSliderBinding: Binding<Double> {
+        Binding {
+            Double(model.targetBrightnessPercent)
+        } set: { newValue in
+            model.targetBrightnessPercent = Int(newValue.rounded())
         }
     }
 

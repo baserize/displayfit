@@ -16,20 +16,23 @@ struct DisplayBrightnessController: Sendable {
     private let ddcBrightnessController = DDCBrightnessController()
 
     func displays() -> [DisplayDevice] {
-        withControlTargets { targets in
+        return withControlTargets { targets in
             targets.map(\.device)
         }
     }
 
     @discardableResult
-    func setAllDisplaysToMaximum() -> BrightnessRunResult {
-        withControlTargets { targets in
+    func setAllDisplays(to targetBrightness: Float) -> BrightnessRunResult {
+        let normalizedBrightness = min(max(targetBrightness, 0), 1)
+        let targetPercent = Int((normalizedBrightness * 100).rounded())
+
+        return withControlTargets { targets in
             let adjustableTargets = targets.filter(\.device.isBrightnessAdjustable)
             var succeededCount = 0
             var failedDisplays: [String] = []
 
             for target in adjustableTargets {
-                guard setMaximumBrightness(using: target) else {
+                guard setBrightness(normalizedBrightness, using: target) else {
                     failedDisplays.append(target.device.name)
                     continue
                 }
@@ -41,6 +44,7 @@ struct DisplayBrightnessController: Sendable {
                 attemptedCount: adjustableTargets.count,
                 succeededCount: succeededCount,
                 failedDisplays: failedDisplays,
+                targetPercent: targetPercent,
                 completedAt: Date()
             )
         }
@@ -165,46 +169,46 @@ struct DisplayBrightnessController: Sendable {
         )
     }
 
-    private func setMaximumBrightness(using target: ControlTarget) -> Bool {
+    private func setBrightness(_ value: Float, using target: ControlTarget) -> Bool {
         if target.device.brightnessBackend == .appleNative,
-           appleNativeBrightnessController.setBrightness(1.0, displayID: target.displayID) {
+           appleNativeBrightnessController.setBrightness(value, displayID: target.displayID) {
             return true
         }
 
         if let ioDisplayService = target.ioDisplayService,
            target.device.brightnessBackend == .ioDisplay,
-           setBrightness(1.0, service: ioDisplayService.service) {
+           setBrightness(value, service: ioDisplayService.service) {
             return true
         }
 
         if target.device.brightnessBackend == .appleSiliconDDC,
-           appleSiliconDDCController.setBrightnessToMaximum(service: target.appleSiliconService?.service) {
+           appleSiliconDDCController.setBrightness(value, service: target.appleSiliconService?.service) {
             return true
         }
 
         if target.device.brightnessBackend == .ddcCI,
            let framebuffer = target.ioDisplayService?.framebuffer,
-           ddcBrightnessController.setBrightnessToMaximum(framebuffer: framebuffer) {
+           ddcBrightnessController.setBrightness(value, framebuffer: framebuffer) {
             return true
         }
 
-        return setMaximumBrightnessUsingFallbacks(target)
+        return setBrightnessUsingFallbacks(value, target: target)
     }
 
-    private func setMaximumBrightnessUsingFallbacks(_ target: ControlTarget) -> Bool {
-        if appleNativeBrightnessController.setBrightness(1.0, displayID: target.displayID) {
+    private func setBrightnessUsingFallbacks(_ value: Float, target: ControlTarget) -> Bool {
+        if appleNativeBrightnessController.setBrightness(value, displayID: target.displayID) {
             return true
         }
 
         if let service = target.ioDisplayService?.service,
-           setBrightness(1.0, service: service) {
+           setBrightness(value, service: service) {
             return true
         }
 
         let appleSiliconService = target.appleSiliconService
             ?? appleSiliconDDCController.serviceMatches(for: [target.displayID])[target.displayID]
 
-        if appleSiliconDDCController.setBrightnessToMaximum(service: appleSiliconService?.service) {
+        if appleSiliconDDCController.setBrightness(value, service: appleSiliconService?.service) {
             return true
         }
 
@@ -212,7 +216,7 @@ struct DisplayBrightnessController: Sendable {
             return false
         }
 
-        return ddcBrightnessController.setBrightnessToMaximum(framebuffer: framebuffer)
+        return ddcBrightnessController.setBrightness(value, framebuffer: framebuffer)
     }
 
     private func displayName(

@@ -82,9 +82,11 @@ struct AppleSiliconDDCController: Sendable {
     }
 
     @discardableResult
-    func setBrightnessToMaximum(service: IOAVService?) -> Bool {
+    func setBrightness(_ normalizedValue: Float, service: IOAVService?) -> Bool {
+        let clampedValue = min(max(normalizedValue, 0), 1)
         let maximum = readBrightness(service: service)?.maximum ?? 100
-        return setBrightness(maximum, service: service)
+        let rawValue = UInt16((Float(maximum) * clampedValue).rounded())
+        return setBrightness(rawValue, service: service)
     }
 
     @discardableResult

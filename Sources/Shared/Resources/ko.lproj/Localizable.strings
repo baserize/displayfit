@@ -1,16 +1,19 @@
 "app.title" = "Full Brightness";
 "sidebar.displays" = "모니터";
-"header.subtitle" = "밝기 조정 가능한 모니터를 찾고, 필요할 때 모두 100%로 맞춥니다.";
+"header.subtitle" = "밝기 조정 가능한 모니터를 찾고, 필요할 때 내가 정한 Full 밝기로 맞춥니다.";
 
 "action.refresh" = "새로고침";
-"action.set_all.short" = "100%";
-"action.set_all.connected" = "연결된 모니터 100%";
-"action.set_all.all_displays" = "모든 모니터 100%";
-"action.auto_on_connect" = "연결 시 자동 100%";
+"action.set_all.short" = "Full";
+"action.set_all.connected_format" = "연결된 모니터 Full (%d%%)";
+"action.set_all.all_displays_format" = "모든 모니터 Full (%d%%)";
+"action.auto_on_connect_format" = "연결 시 자동 Full (%d%%)";
 "action.open_app" = "Full Brightness 열기";
 "action.settings" = "설정";
 "action.quit" = "종료";
 
+"settings.section.brightness" = "Full 밝기";
+"settings.full_level" = "Full 기준 밝기";
+"settings.full_level.stepper_format" = "Full 기준: %d%%";
 "settings.section.general" = "일반";
 "settings.launch_at_login" = "로그인 시 실행";
 "settings.launch_at_login.requires_approval" = "시스템 설정에서 승인이 필요합니다";
@@ -34,30 +37,31 @@
 "display.name.builtin" = "내장 디스플레이";
 "display.name.fallback_format" = "디스플레이 %u-%u";
 
+"brightness.percent_format" = "%d%%";
 "brightness.result.none" = "밝기 조정 가능한 모니터가 없습니다.";
-"brightness.result.success_format" = "%d개 모니터를 100%%로 설정했습니다.";
-"brightness.result.partial_format" = "%d/%d개 모니터를 100%%로 설정했습니다.";
+"brightness.result.success_format" = "%d개 모니터를 %d%%로 설정했습니다.";
+"brightness.result.partial_format" = "%d/%d개 모니터를 %d%%로 설정했습니다.";
 
-"control.set_all.display_name" = "모니터 100%";
-"control.set_all.description" = "밝기 조정 가능한 연결 모니터를 즉시 100%로 설정합니다.";
-"control.auto.display_name" = "연결 시 100%";
-"control.auto.description" = "새 모니터가 연결되면 밝기를 자동으로 100%로 설정합니다.";
-"control.auto.label" = "연결 시 100%";
+"control.set_all.display_name" = "모니터 Full";
+"control.set_all.description" = "밝기 조정 가능한 연결 모니터를 내가 정한 Full 밝기로 즉시 설정합니다.";
+"control.auto.display_name" = "연결 시 Full";
+"control.auto.description" = "새 모니터가 연결되면 밝기를 내가 정한 Full 밝기로 자동 설정합니다.";
+"control.auto.label" = "자동 Full";
 "control.state.on" = "켜짐";
 "control.state.off" = "꺼짐";
 
-"intent.set_all.title" = "모든 모니터 100%";
-"intent.set_all.description" = "밝기 조정 가능한 연결 모니터를 즉시 100%로 설정합니다.";
-"intent.set_all.dialog" = "밝기 조정 가능한 모니터를 100%로 설정했습니다.";
-"intent.auto.title" = "연결 시 자동 100%";
-"intent.auto.description" = "새 모니터 연결 시 자동으로 밝기를 100%로 설정할지 전환합니다.";
+"intent.set_all.title" = "모든 모니터 Full";
+"intent.set_all.description" = "밝기 조정 가능한 연결 모니터를 내가 정한 Full 밝기로 즉시 설정합니다.";
+"intent.set_all.dialog_format" = "밝기 조정 가능한 모니터를 %d%%로 설정했습니다.";
+"intent.auto.title" = "연결 시 자동 Full";
+"intent.auto.description" = "새 모니터 연결 시 자동으로 내가 정한 Full 밝기로 설정할지 전환합니다.";
 "intent.auto.parameter.enabled" = "켜짐";
-"intent.auto.enable.title" = "연결 시 자동 100% 켜기";
-"intent.auto.enable.description" = "새 모니터가 연결되면 밝기를 자동으로 100%로 설정합니다.";
-"intent.auto.enable.dialog" = "연결 시 자동 100%가 켜졌습니다.";
-"intent.auto.disable.title" = "연결 시 자동 100% 끄기";
-"intent.auto.disable.description" = "새 모니터 연결 시 자동 100% 설정을 끕니다.";
-"intent.auto.disable.dialog" = "연결 시 자동 100%가 꺼졌습니다.";
-"intent.shortcut.set_all.short_title" = "모니터 100%";
-"intent.shortcut.auto_enable.short_title" = "자동 100% 켜기";
-"intent.shortcut.auto_disable.short_title" = "자동 100% 끄기";
+"intent.auto.enable.title" = "연결 시 자동 Full 켜기";
+"intent.auto.enable.description" = "새 모니터가 연결되면 밝기를 내가 정한 Full 밝기로 자동 설정합니다.";
+"intent.auto.enable.dialog_format" = "연결 시 자동 Full이 %d%% 기준으로 켜졌습니다.";
+"intent.auto.disable.title" = "연결 시 자동 Full 끄기";
+"intent.auto.disable.description" = "새 모니터 연결 시 자동 Full 설정을 끕니다.";
+"intent.auto.disable.dialog" = "연결 시 자동 Full이 꺼졌습니다.";
+"intent.shortcut.set_all.short_title" = "모니터 Full";
+"intent.shortcut.auto_enable.short_title" = "자동 Full 켜기";
+"intent.shortcut.auto_disable.short_title" = "자동 Full 끄기";
