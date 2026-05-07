@@ -17,6 +17,14 @@
 "settings.launch_at_login" = "로그인 시 실행";
 "settings.launch_at_login.requires_approval" = "시스템 설정에서 승인이 필요합니다";
 "settings.error_format" = "%@";
+"settings.section.shortcuts" = "키보드 단축키";
+"settings.shortcut.set_full" = "모니터 Full 적용";
+"settings.shortcut.refresh" = "모니터 새로고침";
+"settings.shortcut.recording" = "단축키 입력";
+"settings.shortcut.reset" = "초기화";
+"settings.shortcut.invalid" = "Command, Control, Option 중 하나가 포함된 단축키를 사용하세요.";
+"settings.shortcut.duplicate_format" = "이미 %@에서 사용하는 단축키입니다.";
+"settings.shortcut.reserved" = "표준 앱 명령에서 이미 사용하는 단축키입니다.";
 
 "displays.section.title" = "밝기 조정 가능 모니터";
 "displays.empty.title" = "감지된 모니터 없음";

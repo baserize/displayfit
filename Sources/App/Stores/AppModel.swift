@@ -1,4 +1,5 @@
 import AppKit
+import Carbon.HIToolbox
 import CoreGraphics
 import Foundation
 import Observation
@@ -8,6 +9,7 @@ import Observation
 final class AppModel {
     private let brightnessClient = DisplayBrightnessClient.shared
     private var preferences = BrightnessPreferences()
+    private var keyboardShortcutPreferences = KeyboardShortcutPreferences()
     private var monitor: DisplayConnectionMonitor?
     private var screenParametersObserver: NSObjectProtocol?
     private var autoBrightnessTask: Task<Void, Never>?
@@ -15,6 +17,7 @@ final class AppModel {
 
     var displays: [DisplayDevice] = []
     var lastRunResult: BrightnessRunResult?
+    var keyboardShortcuts: [ShortcutAction: AppKeyboardShortcut] = [:]
 
     var autoFullEnabled: Bool {
         get { preferences.autoFullEnabled }
@@ -45,6 +48,12 @@ final class AppModel {
     }
 
     init() {
+        let shortcutPreferences = keyboardShortcutPreferences
+        keyboardShortcuts = Dictionary(
+            uniqueKeysWithValues: ShortcutAction.allCases.map { action in
+                (action, shortcutPreferences.shortcut(for: action))
+            }
+        )
         refreshDisplays()
         monitor = DisplayConnectionMonitor { [weak self] _, flags in
             self?.handleDisplayChange(flags: flags)
@@ -75,6 +84,31 @@ final class AppModel {
             let latestDisplays = await brightnessClient.displays()
             self?.applyBrightnessRunResult(result, displays: latestDisplays)
         }
+    }
+
+    func shortcut(for action: ShortcutAction) -> AppKeyboardShortcut {
+        keyboardShortcuts[action] ?? action.defaultShortcut
+    }
+
+    func setShortcut(_ shortcut: AppKeyboardShortcut, for action: ShortcutAction) -> ShortcutUpdateResult {
+        if let duplicateAction = ShortcutAction.allCases.first(where: { candidate in
+            candidate != action && self.shortcut(for: candidate) == shortcut
+        }) {
+            return .duplicate(duplicateAction)
+        }
+
+        if ShortcutReservedKeyEquivalent.isReserved(shortcut) {
+            return .reserved
+        }
+
+        keyboardShortcutPreferences.setShortcut(shortcut, for: action)
+        keyboardShortcuts[action] = shortcut
+        return .saved
+    }
+
+    func resetShortcut(for action: ShortcutAction) {
+        keyboardShortcutPreferences.resetShortcut(for: action)
+        keyboardShortcuts[action] = action.defaultShortcut
     }
 
     private func handleDisplayChange(flags: CGDisplayChangeSummaryFlags) {
@@ -149,6 +183,26 @@ final class AppModel {
             }
         }
     }
+}
+
+enum ShortcutUpdateResult: Equatable {
+    case saved
+    case duplicate(ShortcutAction)
+    case reserved
+}
+
+private enum ShortcutReservedKeyEquivalent {
+    static func isReserved(_ shortcut: AppKeyboardShortcut) -> Bool {
+        reservedShortcuts.contains(shortcut)
+    }
+
+    private static let reservedShortcuts = Set([
+        AppKeyboardShortcut(keyCode: UInt16(kVK_ANSI_Q), key: "Q", modifiers: [.command]),
+        AppKeyboardShortcut(keyCode: UInt16(kVK_ANSI_Comma), key: ",", modifiers: [.command]),
+        AppKeyboardShortcut(keyCode: UInt16(kVK_ANSI_H), key: "H", modifiers: [.command]),
+        AppKeyboardShortcut(keyCode: UInt16(kVK_ANSI_M), key: "M", modifiers: [.command]),
+        AppKeyboardShortcut(keyCode: UInt16(kVK_ANSI_W), key: "W", modifiers: [.command]),
+    ])
 }
 
 private enum RefreshCadence {

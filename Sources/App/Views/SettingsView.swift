@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Bindable var model: AppModel
     @State private var launchAtLoginState = LaunchAtLoginController().state
     @State private var launchAtLoginError: String?
+    @State private var shortcutWarning: String?
 
     private let launchAtLoginController = LaunchAtLoginController()
 
@@ -41,6 +42,41 @@ struct SettingsView: View {
 
                 if let launchAtLoginError {
                     Label(L10n.string("settings.error_format", launchAtLoginError), systemImage: "exclamationmark.triangle")
+                        .foregroundStyle(.orange)
+                }
+            }
+
+            Section("settings.section.shortcuts") {
+                ForEach(ShortcutAction.allCases) { action in
+                    HStack(spacing: 12) {
+                        Label(L10n.string(action.titleKey), systemImage: action.systemImage)
+
+                        Spacer()
+
+                        KeyboardShortcutRecorder(
+                            shortcut: model.shortcut(for: action),
+                            onRecord: { shortcut in
+                                setShortcut(shortcut, for: action)
+                            },
+                            onInvalidShortcut: {
+                                shortcutWarning = L10n.string("settings.shortcut.invalid")
+                            }
+                        )
+
+                        Button {
+                            model.resetShortcut(for: action)
+                            shortcutWarning = nil
+                        } label: {
+                            Label("settings.shortcut.reset", systemImage: "arrow.counterclockwise")
+                        }
+                        .labelStyle(.iconOnly)
+                        .buttonStyle(.borderless)
+                        .help(L10n.string("settings.shortcut.reset"))
+                    }
+                }
+
+                if let shortcutWarning {
+                    Label(shortcutWarning, systemImage: "exclamationmark.triangle")
                         .foregroundStyle(.orange)
                 }
             }
@@ -82,5 +118,16 @@ struct SettingsView: View {
 
     private func refreshLaunchAtLoginState() {
         launchAtLoginState = launchAtLoginController.state
+    }
+
+    private func setShortcut(_ shortcut: AppKeyboardShortcut, for action: ShortcutAction) {
+        switch model.setShortcut(shortcut, for: action) {
+        case .saved:
+            shortcutWarning = nil
+        case .duplicate(let duplicateAction):
+            shortcutWarning = L10n.string("settings.shortcut.duplicate_format", L10n.string(duplicateAction.titleKey))
+        case .reserved:
+            shortcutWarning = L10n.string("settings.shortcut.reserved")
+        }
     }
 }

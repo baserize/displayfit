@@ -13,6 +13,7 @@
 		1CBD2B9285D86925E312ED5B /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36CBB74B24CC40CEFC49F7A /* AppConstants.swift */; };
 		22D37BED51D4BF18851E304D /* FullBrightnessAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E151A75552AA63373742B3 /* FullBrightnessAppShortcuts.swift */; };
 		2976D6858E294CCC615C372D /* ControlCenterReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBBEE9B918096EB7BD530E /* ControlCenterReloader.swift */; };
+		299EB3C7C9E0F0259C374C4C /* KeyboardShortcutPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB0C582F87DB82EF23826ED /* KeyboardShortcutPreferences.swift */; };
 		33AFE0970F868A5AF2D1425E /* BrightnessPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FABEF2281F8D87226DB863 /* BrightnessPreferences.swift */; };
 		3809A5DF8E8127805610FDA6 /* MenuBarControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323FE3AE9E055522E37E1AF /* MenuBarControlView.swift */; };
 		3D3329B1610D667003016A2B /* LaunchAtLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F11FAA1D9B577C58B2AAEC /* LaunchAtLoginController.swift */; };
@@ -46,11 +47,13 @@
 		CDA33D9EADB1C5E3EB28A40D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 382E785AF019E45785C3A69A /* Localizable.strings */; };
 		D86FA508413B30EC628C220B /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36CBB74B24CC40CEFC49F7A /* AppConstants.swift */; };
 		DA6B8B59EF3B880842EBA168 /* FullBrightnessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47D091A7F32020C07C2260A /* FullBrightnessApp.swift */; };
+		DD26F450FFD38507FF330763 /* KeyboardShortcutRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71AF18C4ADB98270C03C3C9 /* KeyboardShortcutRecorder.swift */; };
 		DF5BC7A709F866EAED3C1F77 /* AppleNativeBrightnessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC37DA0005AC8BE7EEEAF0BE /* AppleNativeBrightnessController.swift */; };
 		E5F1B58B69B16C0B86EC274F /* LocalizedDisplayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEA64CEB97B623104D84CE3 /* LocalizedDisplayName.swift */; };
 		EBF949110EB5B2D5D2CE48E4 /* DisplayBrightnessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4958A7F5E5F62670720A5CD /* DisplayBrightnessController.swift */; };
 		EC4F1411DB1CF3444B956242 /* ControlCenterReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EBBEE9B918096EB7BD530E /* ControlCenterReloader.swift */; };
 		ECB457F9B3F8A7180F288A54 /* BrightnessPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FABEF2281F8D87226DB863 /* BrightnessPreferences.swift */; };
+		EEF3383DDEC65D696F8C47B8 /* AppKeyboardShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB1313E228C739314CD5C5 /* AppKeyboardShortcut.swift */; };
 		F4A4FBA4ECC3649ED5C68016 /* AppleNativeBrightnessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC37DA0005AC8BE7EEEAF0BE /* AppleNativeBrightnessController.swift */; };
 		F5A2CCBBE77FC792A26F57EE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927C1C29E306D115CA64027E /* SettingsView.swift */; };
 		F699E50FEAAF4F003CEF8927 /* FullBrightnessControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5FF1BE0000D2F1C9F0DA19 /* FullBrightnessControls.swift */; };
@@ -103,8 +106,10 @@
 		A36B58AED35436A3F9E79516 /* DisplayPrivateAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayPrivateAPIs.h; sourceTree = "<group>"; };
 		AC37DA0005AC8BE7EEEAF0BE /* AppleNativeBrightnessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleNativeBrightnessController.swift; sourceTree = "<group>"; };
 		AD68C50812796A8E8F3A602C /* DDCBrightnessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDCBrightnessController.swift; sourceTree = "<group>"; };
+		AEB0C582F87DB82EF23826ED /* KeyboardShortcutPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutPreferences.swift; sourceTree = "<group>"; };
 		B1F1CEA901266A0198575A25 /* FullBrightnessControls.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FullBrightnessControls.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5395F579390BEC8842F3D2 /* FullBrightness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FullBrightness.entitlements; sourceTree = "<group>"; };
+		CDBB1313E228C739314CD5C5 /* AppKeyboardShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyboardShortcut.swift; sourceTree = "<group>"; };
 		D3E151A75552AA63373742B3 /* FullBrightnessAppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullBrightnessAppShortcuts.swift; sourceTree = "<group>"; };
 		D4958A7F5E5F62670720A5CD /* DisplayBrightnessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightnessController.swift; sourceTree = "<group>"; };
 		DE58E0DF969902D22A1C5DBB /* DisplayServiceMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayServiceMatch.swift; sourceTree = "<group>"; };
@@ -112,6 +117,7 @@
 		E0F11FAA1D9B577C58B2AAEC /* LaunchAtLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginController.swift; sourceTree = "<group>"; };
 		E291F798287352B443BA8203 /* FullBrightnessControls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FullBrightnessControls.entitlements; sourceTree = "<group>"; };
 		E36CBB74B24CC40CEFC49F7A /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		E71AF18C4ADB98270C03C3C9 /* KeyboardShortcutRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutRecorder.swift; sourceTree = "<group>"; };
 		EB477E9025D8F25B09923C9A /* DisplayConnectionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayConnectionMonitor.swift; sourceTree = "<group>"; };
 		ECC1A79D3E951BF0F092B376 /* AppleSiliconDDCController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSiliconDDCController.swift; sourceTree = "<group>"; };
 		F241D253AE183C330BE9AA64 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 				BF5395F579390BEC8842F3D2 /* FullBrightness.entitlements */,
 				F47D091A7F32020C07C2260A /* FullBrightnessApp.swift */,
 				0E83D306B29A7C6E0D01ED19 /* Info.plist */,
+				EE9E1866DF6C954FF60B9824 /* Models */,
 				8F3DCFC8C03C4850534CF47A /* Services */,
 				C362CC0123B47BB8BCC8F104 /* Stores */,
 				A870D4BD52878A0D418D58A6 /* Views */,
@@ -194,6 +201,7 @@
 				F241D253AE183C330BE9AA64 /* ContentView.swift */,
 				1351091825835D8B3FFEC95D /* DisplayDashboardView.swift */,
 				988030B02557E9553F27B0E3 /* DisplayListView.swift */,
+				E71AF18C4ADB98270C03C3C9 /* KeyboardShortcutRecorder.swift */,
 				8323FE3AE9E055522E37E1AF /* MenuBarControlView.swift */,
 				927C1C29E306D115CA64027E /* SettingsView.swift */,
 			);
@@ -204,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				5B0337B7C4BBDEF865F5A363 /* AppModel.swift */,
+				AEB0C582F87DB82EF23826ED /* KeyboardShortcutPreferences.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -246,6 +255,14 @@
 				B1F1CEA901266A0198575A25 /* FullBrightnessControls.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EE9E1866DF6C954FF60B9824 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CDBB1313E228C739314CD5C5 /* AppKeyboardShortcut.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F0D92CD222D1B26A26818BD2 /* Support */ = {
@@ -392,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86FA508413B30EC628C220B /* AppConstants.swift in Sources */,
+				EEF3383DDEC65D696F8C47B8 /* AppKeyboardShortcut.swift in Sources */,
 				CB3CFDA6AC355FDC612DD719 /* AppModel.swift in Sources */,
 				F4A4FBA4ECC3649ED5C68016 /* AppleNativeBrightnessController.swift in Sources */,
 				5D4EE4547F1F5D5704E57DB6 /* AppleSiliconDDCController.swift in Sources */,
@@ -411,6 +429,8 @@
 				DA6B8B59EF3B880842EBA168 /* FullBrightnessApp.swift in Sources */,
 				22D37BED51D4BF18851E304D /* FullBrightnessAppShortcuts.swift in Sources */,
 				F699E50FEAAF4F003CEF8927 /* FullBrightnessControls.swift in Sources */,
+				299EB3C7C9E0F0259C374C4C /* KeyboardShortcutPreferences.swift in Sources */,
+				DD26F450FFD38507FF330763 /* KeyboardShortcutRecorder.swift in Sources */,
 				7A03F48B482D185CCA8FE694 /* L10n.swift in Sources */,
 				3D3329B1610D667003016A2B /* LaunchAtLoginController.swift in Sources */,
 				7EB7FEFDD01AD7D370A671AA /* LocalizedDisplayName.swift in Sources */,
@@ -497,7 +517,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20260507001;
+				CURRENT_PROJECT_VERSION = 20260507002;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_LANGUAGE = en;
 				DEVELOPMENT_TEAM = 27LDR382XX;
@@ -621,7 +641,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20260507001;
+				CURRENT_PROJECT_VERSION = 20260507002;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_LANGUAGE = en;
 				DEVELOPMENT_TEAM = 27LDR382XX;

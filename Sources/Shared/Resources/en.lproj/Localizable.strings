@@ -17,6 +17,14 @@
 "settings.launch_at_login" = "Launch at Login";
 "settings.launch_at_login.requires_approval" = "Approval required in System Settings";
 "settings.error_format" = "%@";
+"settings.section.shortcuts" = "Keyboard Shortcuts";
+"settings.shortcut.set_full" = "Set displays to Full";
+"settings.shortcut.refresh" = "Refresh displays";
+"settings.shortcut.recording" = "Press shortcut";
+"settings.shortcut.reset" = "Reset";
+"settings.shortcut.invalid" = "Use a shortcut with Command, Control, or Option.";
+"settings.shortcut.duplicate_format" = "That shortcut is already used by %@.";
+"settings.shortcut.reserved" = "That shortcut is already used by a standard app command.";
 
 "displays.section.title" = "Brightness-adjustable displays";
 "displays.empty.title" = "No displays detected";

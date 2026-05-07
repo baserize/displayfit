@@ -17,7 +17,18 @@ struct FullBrightnessApp: App {
                 Button(L10n.string("action.set_all.all_displays_format", model.targetBrightnessPercent)) {
                     model.setAllDisplaysToFullBrightness()
                 }
-                .keyboardShortcut("b", modifiers: [.command, .shift])
+                .keyboardShortcut(
+                    model.shortcut(for: .setFullBrightness).keyEquivalent,
+                    modifiers: model.shortcut(for: .setFullBrightness).eventModifiers
+                )
+
+                Button("action.refresh") {
+                    model.refreshDisplays()
+                }
+                .keyboardShortcut(
+                    model.shortcut(for: .refreshDisplays).keyEquivalent,
+                    modifiers: model.shortcut(for: .refreshDisplays).eventModifiers
+                )
             }
         }
 

@@ -1,5 +1,6 @@
 .build/
 .codex/
+dist/
 DerivedData/
 *.xcuserstate
 xcuserdata/
