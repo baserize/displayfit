@@ -13,7 +13,6 @@
 
 "settings.section.brightness" = "Full 밝기";
 "settings.full_level" = "Full 기준 밝기";
-"settings.full_level.stepper_format" = "Full 기준: %d%%";
 "settings.section.general" = "일반";
 "settings.launch_at_login" = "로그인 시 실행";
 "settings.launch_at_login.requires_approval" = "시스템 설정에서 승인이 필요합니다";

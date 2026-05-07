@@ -1,8 +1,10 @@
 # Full Brightness
 
-Full Brightness is a macOS utility for display-heavy setups. It lists connected displays, shows resolution and HiDPI details, identifies which displays can be controlled, and can set supported displays to your chosen Full brightness level on demand or automatically when a new display connects.
+[한국어 문서](README.ko.md)
 
-Current release: `2026.05.07.001`
+Full Brightness is a macOS utility for display-heavy setups. It lists connected displays, shows resolution and HiDPI details, identifies which displays can be controlled, and sets supported displays to your chosen Full brightness level on demand or automatically when a new display connects.
+
+Current GitHub release: `2026.05.07.001`
 
 ## Requirements
 
@@ -19,7 +21,7 @@ Some monitors, docks, cables, KVMs, and DisplayLink-style adapters block brightn
   Lists connected displays and clearly marks whether brightness can be read or written.
 
 - **Custom Full brightness level**  
-  Lets you define what Full means for your setup from 1% to 100%.
+  Lets you define what Full means for your setup from 1% to 100% in Settings.
 
 - **One-click Full brightness**  
   Sets every adjustable connected display to your Full level from the main window, menu bar, Control Center, Shortcuts, Siri, or Spotlight.
@@ -39,7 +41,7 @@ Some monitors, docks, cables, KVMs, and DisplayLink-style adapters block brightn
   Includes a compact menu bar extra with refresh, one-click Full brightness, auto mode, display status, app opening, settings, and quit actions.
 
 - **Native Settings and Launch at Login**  
-  Uses a standard macOS Settings window for app-level options, including launch at login.
+  Uses a standard macOS Settings window for the Full brightness level and launch at login.
 
 - **App Shortcuts integration**  
   Exposes App Intents-backed shortcuts for Shortcuts, Siri, and Spotlight:

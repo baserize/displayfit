@@ -13,7 +13,6 @@
 
 "settings.section.brightness" = "Full Brightness";
 "settings.full_level" = "Full brightness level";
-"settings.full_level.stepper_format" = "Full level: %d%%";
 "settings.section.general" = "General";
 "settings.launch_at_login" = "Launch at Login";
 "settings.launch_at_login.requires_approval" = "Approval required in System Settings";

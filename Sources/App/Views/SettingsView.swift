@@ -26,11 +26,6 @@ struct SettingsView: View {
                         in: Double(BrightnessPreferences.targetBrightnessPercentRange.lowerBound)...Double(BrightnessPreferences.targetBrightnessPercentRange.upperBound),
                         step: 1
                     )
-
-                    Stepper(value: $model.targetBrightnessPercent, in: BrightnessPreferences.targetBrightnessPercentRange) {
-                        Text(L10n.string("settings.full_level.stepper_format", model.targetBrightnessPercent))
-                            .foregroundStyle(.secondary)
-                    }
                 }
             }
 
