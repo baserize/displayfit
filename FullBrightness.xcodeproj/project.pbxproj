@@ -38,7 +38,7 @@
 		8DDF53D294BF2CF134BBD1C9 /* BrightnessControlIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3795FF42D51453C65D03A4B7 /* BrightnessControlIntents.swift */; };
 		9234C10C21E21B3C00DBEE36 /* DisplayDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD4DBB3B794A46EB157FFAD /* DisplayDevice.swift */; };
 		92EA88B1C993A7BCEB9EF287 /* FullBrightnessAppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E151A75552AA63373742B3 /* FullBrightnessAppShortcuts.swift */; };
-		9C6634029E30B553299BCE51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCEB4ABA3BCAC03E880864BD /* Assets.xcassets */; };
+		A49D3FA1E2FD57840E68B585 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 109B4E95844C8AF4B8D592E5 /* AppIcon.icon */; };
 		A74223906AFA88828600198B /* DisplayBrightnessClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B87041CA6F613E38E2A3170 /* DisplayBrightnessClient.swift */; };
 		AC18F9AF093814C34D79074E /* DisplayDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD4DBB3B794A46EB157FFAD /* DisplayDevice.swift */; };
 		C3F6F169C35B24CA43CCDBC9 /* DisplayConnectionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB477E9025D8F25B09923C9A /* DisplayConnectionMonitor.swift */; };
@@ -82,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		0E83D306B29A7C6E0D01ED19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		109B4E95844C8AF4B8D592E5 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		1351091825835D8B3FFEC95D /* DisplayDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayDashboardView.swift; sourceTree = "<group>"; };
 		19CCE4CD0AE054FE7B03B541 /* FullBrightness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FullBrightness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		234358FA92046FA803DA2E61 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
@@ -116,7 +117,6 @@
 		F241D253AE183C330BE9AA64 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F47D091A7F32020C07C2260A /* FullBrightnessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullBrightnessApp.swift; sourceTree = "<group>"; };
 		FB786FF112BE8B47972B314B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FCEB4ABA3BCAC03E880864BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -168,7 +168,7 @@
 		8EA74C368548FBB5B772D03A /* App */ = {
 			isa = PBXGroup;
 			children = (
-				FCEB4ABA3BCAC03E880864BD /* Assets.xcassets */,
+				109B4E95844C8AF4B8D592E5 /* AppIcon.icon */,
 				BF5395F579390BEC8842F3D2 /* FullBrightness.entitlements */,
 				F47D091A7F32020C07C2260A /* FullBrightnessApp.swift */,
 				0E83D306B29A7C6E0D01ED19 /* Info.plist */,
@@ -354,7 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C6634029E30B553299BCE51 /* Assets.xcassets in Resources */,
+				A49D3FA1E2FD57840E68B585 /* AppIcon.icon in Resources */,
 				44A96EE40BE3FCAE2F183555 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

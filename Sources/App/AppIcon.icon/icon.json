@@ -1,0 +1,81 @@
+{
+  "fill" : {
+    "automatic-gradient" : "extended-srgb:0.00000,0.53333,1.00000,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "glass" : true,
+          "hidden" : false,
+          "image-name" : "vectorized_019e0225-75d3-7ea2-a33c-15635b9fd9a4.png",
+          "name" : "vectorized_019e0225-75d3-7ea2-a33c-15635b9fd9a4",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              -0.25,
+              -10.9375
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "blur-material" : null,
+      "layers" : [
+        {
+          "glass" : true,
+          "image-name" : "1313.png",
+          "name" : "1313",
+          "position" : {
+            "scale" : 0.84,
+            "translation-in-points" : [
+              0.4199999999999591,
+              33.7734375
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "specular" : true,
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "image-name" : "ig_04c6ae8c6ec542980169fc6f9214d08191aa8993a41e559dfb 2.png",
+          "name" : "ig_04c6ae8c6ec542980169fc6f9214d08191aa8993a41e559dfb 2"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
